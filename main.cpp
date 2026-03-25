@@ -12,6 +12,7 @@ public:
 		Size = 0;
 		Capacity = 1;
 		Data = new char[Capacity];
+		NewData = new char[Capacity];
 	}
 	~FString()
 	{
@@ -19,13 +20,29 @@ public:
 		Data = nullptr;
 	}
 
+	//void AddCapacity()
+	//{
+	//	//Capacity의 크기를 믿을 수 없어서 Size보다 작을 수도 있으니까 미리 워닝을 주는 것
+	//	NewData = new char[Capacity];
+
+	//	for (int i = 0; i < Size - 1; i++)
+	//	{
+	//		NewData[i] = Data[i];
+	//	}
+
+	//	delete[] Data;
+	//	Data = NewData;
+	//	delete[] NewData;
+	//	NewData = nullptr;
+	//}
+
 	void PushBack(char InC)
 	{
 		Size++;
 		if (Size > Capacity)
 		{
 			Capacity = Capacity * 2;
-			char* NewData = new char[Capacity];
+			NewData = new char[Capacity];
 
 			for (int i = 0; i < Size - 1; i++)
 			{
@@ -34,6 +51,7 @@ public:
 
 			delete[] Data;
 			Data = NewData;
+			NewData = nullptr;
 		}
 
 		Data[Size - 1] = InC;
@@ -55,6 +73,7 @@ public:
 
 		delete[] Data;
 		Data = NewData;
+		NewData = nullptr;
 
 		for (int i = 0; i < Other->GetSize(); i++)
 		{
@@ -84,7 +103,7 @@ public:
 protected:
 	size_t Size;
 	size_t Capacity;
-
+	char* NewData;
 };
 
 
