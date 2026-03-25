@@ -12,7 +12,6 @@ public:
 		Size = 0;
 		Capacity = 1;
 		Data = new char[Capacity];
-		NewData = new char[Capacity];
 	}
 	~FString()
 	{
@@ -42,7 +41,7 @@ public:
 		if (Size > Capacity)
 		{
 			Capacity = Capacity * 2;
-			NewData = new char[Capacity];
+			char* NewData = new char[Capacity];
 
 			for (int i = 0; i < Size - 1; i++)
 			{
@@ -51,7 +50,6 @@ public:
 
 			delete[] Data;
 			Data = NewData;
-			NewData = nullptr;
 		}
 
 		Data[Size - 1] = InC;
@@ -73,7 +71,6 @@ public:
 
 		delete[] Data;
 		Data = NewData;
-		NewData = nullptr;
 
 		for (int i = 0; i < Other->GetSize(); i++)
 		{
@@ -103,7 +100,7 @@ public:
 protected:
 	size_t Size;
 	size_t Capacity;
-	char* NewData;
+	
 };
 
 
