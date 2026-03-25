@@ -74,7 +74,7 @@ public:
 
 		for (int i = 0; i < Other->GetSize(); i++)
 		{
-			PushBack(Other->Data[i]);
+			PushBack(Other->c_str(i));
 		}
 	}
 
@@ -95,9 +95,13 @@ public:
 		return Size;
 	}
 	
-
-	char* Data;
+	const char c_str(int index) const
+	{
+		return Data[index];
+	}
+	
 protected:
+	char* Data;
 	size_t Size;
 	size_t Capacity;
 	
